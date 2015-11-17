@@ -51,6 +51,8 @@
     <Compile Include="GetIndexCmdlet.cs" />
     <Compile Include="GetIndexExistsCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\EsErrorResponse.cs" />
+    <Compile Include="Util\EsException.cs" />
     <Compile Include="Util\EsRequest.cs" />
     <Compile Include="Util\EsResponse.cs" />
   </ItemGroup>

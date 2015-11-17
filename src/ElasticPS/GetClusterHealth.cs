@@ -32,8 +32,7 @@ namespace ElasticPS
             }
             else
             {
-                //TODO - Need an EsError type
-                WriteObject(response);
+                WriteObject(new EsException(response.Content));
             }
         }
     }
