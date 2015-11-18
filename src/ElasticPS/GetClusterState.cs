@@ -4,21 +4,25 @@ using System.Web.Script.Serialization;
 
 namespace ElasticPS
 {
-    [Cmdlet(VerbsCommon.Get, "EsClusterHealth")]
-    public class GetClusterHealth : PSCmdlet
+    [Cmdlet(VerbsCommon.Get, "EsClusterState")]
+    public class GetClusterState : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
         public string Uri { get; set; }
 
+        [Parameter]
+        public SwitchParameter Local { get; set; }
+
         protected override void BeginProcessing()
         {
-            var request = new EsRequest("GET", Uri, "_cluster/health");
+            var request = new EsRequest("GET", Uri, $"_cluster/state?local={Local.ToString().ToLower()}");
 
             var response = request.Send();
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 JavaScriptSerializer ser = new JavaScriptSerializer();
-                var result = ser.Deserialize<EsCluserHealthResponse>(response.Content);
+                WriteDebug("!!!");
+                var result = ser.Deserialize<EsCluserStateResponse>(response.Content);
                 WriteObject(result);
             }
             else

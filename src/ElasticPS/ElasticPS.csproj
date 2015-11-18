@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EsCluserHealthResponse.cs" />
+    <Compile Include="EsCluserStateResponse.cs" />
     <Compile Include="GetClusterHealth.cs" />
+    <Compile Include="GetClusterState.cs" />
     <Compile Include="NewIndexCmdlet.cs" />
     <Compile Include="GetIndexCmdlet.cs" />
     <Compile Include="GetIndexExistsCmdlet.cs" />
