@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace ElasticPS.Util
 {
@@ -62,6 +63,19 @@ namespace ElasticPS.Util
                     return new EsResponse(response.StatusCode, json);
                 }
             }
+        }
+
+        public T Send<T>(string content = "")
+        {
+            var response = Send(content);
+            if((int)response.StatusCode < 300)
+            {
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                var result = ser.Deserialize<T>(response.Content);
+                return result;
+            }
+
+            throw new EsException(response.Content);
         }
     }
 }

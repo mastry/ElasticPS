@@ -18,18 +18,8 @@ namespace ElasticPS
         {
             var request = new EsRequest(HttpMethod.Get, Uri, $"_cluster/state?local={Local.ToString().ToLower()}");
 
-            var response = request.Send();
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                JavaScriptSerializer ser = new JavaScriptSerializer();
-                WriteDebug("!!!");
-                var result = ser.Deserialize<EsClusterStateResponse>(response.Content);
-                WriteObject(result);
-            }
-            else
-            {
-                WriteObject(new EsException(response.Content));
-            }
+            var response = request.Send<EsClusterStateResponse>();
+            WriteObject(response);
         }
     }
 }

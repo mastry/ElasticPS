@@ -15,17 +15,8 @@ namespace ElasticPS
         {
             var request = new EsRequest(HttpMethod.Get, Uri, "_cluster/health");
 
-            var response = request.Send();
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                JavaScriptSerializer ser = new JavaScriptSerializer();
-                var result = ser.Deserialize<EsCluserHealthResponse>(response.Content);
-                WriteObject(result);
-            }
-            else
-            {
-                WriteObject(new EsException(response.Content));
-            }
+            var response = request.Send<EsCluserHealthResponse>();
+            WriteObject(response);
         }
     }
 }
