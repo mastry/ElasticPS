@@ -1,4 +1,5 @@
 ﻿using ElasticPS.Util;
+using System.Net.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ElasticPS
             if (!Uri.EndsWith("/"))
                 Uri += "/";
 
-            var request = new EsRequest("PUT", Uri, Name);
+            var request = new EsRequest(HttpMethod.Put, Uri, Name);
 
             var response = request.Send();
             WriteObject(response);

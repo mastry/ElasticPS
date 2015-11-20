@@ -1,4 +1,5 @@
 ﻿using ElasticPS.Util;
+using System.Net.Http;
 using System.Management.Automation;
 using System.Web.Script.Serialization;
 
@@ -12,7 +13,7 @@ namespace ElasticPS
 
         protected override void BeginProcessing()
         {
-            var request = new EsRequest("GET", Uri, "_cluster/health");
+            var request = new EsRequest(HttpMethod.Get, Uri, "_cluster/health");
 
             var response = request.Send();
             if (response.StatusCode == System.Net.HttpStatusCode.OK)

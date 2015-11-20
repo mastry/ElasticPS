@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,11 +13,11 @@ namespace ElasticPS.Util
     {
         private readonly WebRequest _request;
 
-        public EsRequest(string verb, params string[] requestUri)
+        public EsRequest(HttpMethod verb, params string[] requestUri)
         {
             var fullUri = requestUri.Aggregate((s1, s2) => s1.EndsWith("/") ? $"{s1}{s2}" : $"{s1}/{s2}" );
             _request = WebRequest.Create(fullUri);
-            _request.Method = verb;
+            _request.Method = verb.Method;
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace ElasticPS.Util
                 response = wex.Response as HttpWebResponse;
             }
 
-            //-- Return the response stream and response code as a JsonResponse
+            //-- Return the response stream and response code as an EsResponse
             using (var stream = response.GetResponseStream())
             {
                 using (var reader = new StreamReader(stream))

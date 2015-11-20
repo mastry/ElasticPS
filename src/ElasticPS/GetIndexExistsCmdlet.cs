@@ -1,4 +1,5 @@
 ﻿using ElasticPS.Util;
+using System.Net.Http;
 using System;
 using System.Management.Automation;
 using System.Net;
@@ -16,7 +17,7 @@ namespace ElasticPS
 
         protected override void BeginProcessing()
         {
-            var request = new EsRequest("HEAD", Uri, Name);
+            var request = new EsRequest(HttpMethod.Head, Uri, Name);
 
             var response = request.Send();
             WriteObject(response.StatusCode == HttpStatusCode.OK);
