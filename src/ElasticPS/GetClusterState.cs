@@ -22,7 +22,7 @@ namespace ElasticPS
             {
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 WriteDebug("!!!");
-                var result = ser.Deserialize<EsCluserStateResponse>(response.Content);
+                var result = ser.Deserialize<EsClusterStateResponse>(response.Content);
                 WriteObject(result);
             }
             else
