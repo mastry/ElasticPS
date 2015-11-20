@@ -72,3 +72,10 @@ switch( $health.status )
     }
 }
 ``` 
+
+###Checking Cluster State
+See the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html) for more information on cluster state.
+```PowerShell
+# Replace the IP address with one from your own cluster
+Get-EsClusterState http://1.2.3.4:9200 | fl cluster_name, version, master_node
+```
