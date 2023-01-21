@@ -1,15 +1,18 @@
-#ElasticPS
+# ElasticPS
+
 A [PowerShell](https://technet.microsoft.com/en-us/library/bb978526.aspx) module for managing [Elasticsearch](https://www.elastic.co/) clusters.
 
-##System Requirements
+## System Requirements
 * .Net Framework 4.6+
 * PowerShell version 4+
 * Elasticsearch 2+
 
-##Build
+## Build
+
 ElasticPS was built with Visual Studio 2015 Community (it should build fine in other editions of Visual Studio). If you plan to use ElasticPS in production, don't forget to change the build configuration to `Release`.
 
-##Install
+## Install
+
 ElasticPS is a binary PowerShell module (`ElasticPS.dll`). Please refer to the [PowerShell documentation](https://technet.microsoft.com/en-us/library/dd878350%28v=vs.85%29.aspx) to determine the best installation method for your environment.
 
 The samples below assume that `ElasticPS.dll` is in the current folder, and you have the following import statement:
@@ -23,10 +26,12 @@ Import-Module ElasticPS
 ``` 
 Notice that `.dll` was dropped.
 
-##Common Usage Examples
+## Common Usage Examples
+
 This is very early in the devleopment process, so expect everything to change. Frequently.
 
-###Checking Cluster Health
+### Checking Cluster Health
+
 ```
 Get-EsClusterHealth http://1.2.3.4:9200
 
@@ -44,7 +49,9 @@ number_of_in_flight_fetch        : 0
 task_max_waiting_in_queue_millis : 0
 active_shards_percent_as_number  : 100
 ```
+
 Each of the above cluster health metrics is a property on the returned object, so if you just want to the `status` (for example) you can access that property directly:
+
 ```PowerShell
 # Replace the IP address with one from your own cluster
 $health = Get-EsClusterHealth http://1.2.3.4:9200
@@ -73,8 +80,10 @@ switch( $health.status )
 }
 ``` 
 
-###Checking Cluster State
+### Checking Cluster State
+
 See the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html) for more information on cluster state.
+
 ```PowerShell
 # Replace the IP address with one from your own cluster
 Get-EsClusterState http://1.2.3.4:9200 | fl cluster_name, version, master_node
